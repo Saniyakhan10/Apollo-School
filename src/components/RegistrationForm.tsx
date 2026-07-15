@@ -402,14 +402,17 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
             style={{ position: "fixed", inset: 0, zIndex: 901, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", pointerEvents: "none" }}
           >
-            <div style={{
-              width: "100%", maxWidth: "680px", maxHeight: "92vh",
-              background: "#fff", borderRadius: "24px",
-              boxShadow: "0 40px 80px rgba(0,0,0,0.18)",
-              overflow: "hidden", pointerEvents: "all",
-              display: "flex", flexDirection: "column",
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-            }}>
+            <div
+              className="registration-modal-content"
+              style={{
+                width: "100%", maxWidth: "680px", maxHeight: "92vh",
+                background: "#fff", borderRadius: "24px",
+                boxShadow: "0 40px 80px rgba(0,0,0,0.18)",
+                overflow: "hidden", pointerEvents: "all",
+                display: "flex", flexDirection: "column",
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+              }}
+            >
               {/* Header */}
               <div style={{ padding: "24px 28px 20px", background: "linear-gradient(135deg, #43459E 0%, #62C5D2 100%)", position: "relative", flexShrink: 0 }}>
                 <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "rgba(255,255,255,0.15)", border: "none", borderRadius: "10px", width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#fff" }}>
@@ -472,7 +475,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                     {/* Student Info */}
                     <div>
                       <p style={{ fontSize: "11px", fontWeight: 800, color: "#43459E", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "12px" }}>👨‍🎓 Student Information</p>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }} className="form-grid">
                         <Field label="Student Full Name" icon={User} name="studentName" placeholder="Enter full name" required {...fieldProps("studentName")} />
                         <Field label="Date of Birth" icon={Calendar} name="dob" type="date" required {...fieldProps("dob")} />
                         <SelectField label="Gender" icon={Users} name="gender" options={["Male", "Female", "Other"]} placeholder="Select gender" required {...fieldProps("gender")} />
@@ -485,7 +488,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                     {/* Parent Info */}
                     <div>
                       <p style={{ fontSize: "11px", fontWeight: 800, color: "#43459E", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "12px" }}>👨‍👩‍👦 Parent / Guardian Information</p>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }} className="form-grid">
                         <Field label="Father's Name" icon={User} name="fatherName" placeholder="Father's full name" required {...fieldProps("fatherName")} />
                         <Field label="Mother's Name" icon={User} name="motherName" placeholder="Mother's full name" {...fieldProps("motherName")} />
                         <Field label="Mobile Number" icon={Phone} name="phone" type="tel" placeholder="10-digit mobile no." required {...fieldProps("phone")} />
@@ -501,7 +504,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                     {/* Academic */}
                     <div>
                       <p style={{ fontSize: "11px", fontWeight: 800, color: "#43459E", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "12px" }}>📚 Previous Academic Details</p>
-                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" }} className="form-grid">
                         <Field label="Previous School Name" icon={School} name="prevSchool" placeholder="School name (if any)" {...fieldProps("prevSchool")} />
                         <Field label="Last Class Passed" icon={GraduationCap} name="lastClass" placeholder="e.g. Grade 5" {...fieldProps("lastClass")} />
                       </div>
@@ -512,16 +515,24 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                       type="submit"
                       style={{
                         width: "100%", padding: "15px",
-                        background: "linear-gradient(135deg, #43459E, #62C5D2)",
+                        background: "#43459E",
                         color: "#fff", fontFamily: "inherit", fontSize: "1rem",
                         fontWeight: 800, borderRadius: "12px", border: "none",
                         cursor: "pointer",
                         boxShadow: "0 8px 24px rgba(67,69,158,0.3)",
-                        letterSpacing: "0.02em", transition: "transform 0.2s, box-shadow 0.2s",
+                        letterSpacing: "0.02em", transition: "all 0.2s ease",
                         marginTop: "4px",
                       }}
-                      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 12px 28px rgba(67,69,158,0.4)"; }}
-                      onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(67,69,158,0.3)"; }}
+                      onMouseEnter={e => {
+                        e.currentTarget.style.background = "#62C5D2";
+                        e.currentTarget.style.transform = "translateY(-2px)";
+                        e.currentTarget.style.boxShadow = "0 12px 28px rgba(67,69,158,0.4)";
+                      }}
+                      onMouseLeave={e => {
+                        e.currentTarget.style.background = "#43459E";
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow = "0 8px 24px rgba(67,69,158,0.3)";
+                      }}
                     >
                       Submit Application →
                     </button>
@@ -535,6 +546,13 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
           </motion.div>
         </>
       )}
+      <style>{`
+        @media (max-width: 600px) {
+          .form-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </AnimatePresence>
   );
 }
