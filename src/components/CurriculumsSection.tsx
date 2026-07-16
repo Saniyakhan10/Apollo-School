@@ -79,7 +79,6 @@ export default function CurriculumsSection() {
         {/* Alternating Rows */}
         <div style={{ display: "flex", flexDirection: "column", gap: "72px" }}>
           {curriculums.map((item, i) => {
-            const isEven = i % 2 === 0;
             return (
               <motion.div
                 key={i}
@@ -94,18 +93,8 @@ export default function CurriculumsSection() {
                 }}
                 className="curriculum-row"
               >
-                {/* Image */}
-                {isEven ? (
-                  <>
-                    <CurriculumImage item={item} />
-                    <CurriculumContent item={item} inView={inView} i={i} />
-                  </>
-                ) : (
-                  <>
-                    <CurriculumContent item={item} inView={inView} i={i} />
-                    <CurriculumImage item={item} />
-                  </>
-                )}
+                <CurriculumImage item={item} className="curriculum-img-col" />
+                <CurriculumContent item={item} inView={inView} i={i} className="curriculum-text-col" />
               </motion.div>
             );
           })}
@@ -141,14 +130,22 @@ export default function CurriculumsSection() {
         @media (max-width: 640px) {
           .curriculum-image-container { height: 240px !important; }
         }
+        @media (min-width: 901px) {
+          .curriculum-row:nth-child(even) .curriculum-img-col {
+            order: 2;
+          }
+          .curriculum-row:nth-child(even) .curriculum-text-col {
+            order: 1;
+          }
+        }
       `}</style>
     </section>
   );
 }
 
-function CurriculumImage({ item }: { item: typeof curriculums[0] }) {
+function CurriculumImage({ item, className }: { item: typeof curriculums[0]; className?: string }) {
   return (
-    <div style={{ position: "relative" }}>
+    <div style={{ position: "relative" }} className={className}>
       <div className="curriculum-image-container">
         <Image
           src={item.image}
@@ -182,9 +179,9 @@ function CurriculumImage({ item }: { item: typeof curriculums[0] }) {
   );
 }
 
-function CurriculumContent({ item, inView, i }: { item: typeof curriculums[0]; inView: boolean; i: number }) {
+function CurriculumContent({ item, inView, i, className }: { item: typeof curriculums[0]; inView: boolean; i: number; className?: string }) {
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "16px" }} className={className}>
       <span style={{
         display: "inline-block",
         padding: "5px 14px",

@@ -155,6 +155,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           unoptimized /* Bypasses Next.js image optimization to render the source HD image directly */
           quality={100}
           sizes="100vw"
+          className="hero-bg-img"
           style={{
             objectFit: "cover",
             objectPosition: "center center",
@@ -171,14 +172,17 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           LAYER 2 — WHITE FOG on left (behind text)
           Matches the soft white glow in reference image
       ══════════════════════════════════════════════════ */}
-      <div style={{
-        position: "absolute",
-        top: 0, left: 0, bottom: 0,
-        width: "55%",
-        background: "radial-gradient(ellipse 80% 80% at 30% 55%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.50) 40%, transparent 75%)",
-        zIndex: 1,
-        pointerEvents: "none",
-      }} />
+      <div 
+        className="hero-fog-overlay"
+        style={{
+          position: "absolute",
+          top: 0, left: 0, bottom: 0,
+          width: "55%",
+          background: "radial-gradient(ellipse 80% 80% at 30% 55%, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.50) 40%, transparent 75%)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }} 
+      />
 
       {/* ══════════════════════════════════════════════════
           LAYER 3 — MAIN CONTENT GRID
@@ -359,7 +363,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           </div>
         </div>
 
-        <div style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
+        <div className="infobar-divider" style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
 
         {/* Phone */}
         <div style={{ display: "flex", alignItems: "center", gap: "9px", flexShrink: 0 }}>
@@ -369,17 +373,17 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           </span>
         </div>
 
-        <div style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
+        <div className="infobar-divider" style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
 
         {/* Address */}
         <div style={{ display: "flex", alignItems: "center", gap: "9px", flex: 1, minWidth: 0 }}>
           <MapPin size={17} color="#43459E" strokeWidth={2.5} style={{ flexShrink: 0 }} />
-          <span style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.84rem", fontWeight: 500, color: "#1F2937", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+          <span className="infobar-address-text" style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.84rem", fontWeight: 500, color: "#1F2937", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
             Sumit bazar ke bazu me gondia road balaghat
           </span>
         </div>
 
-        <div style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
+        <div className="infobar-divider" style={{ width: "1px", height: "32px", background: "rgba(0,0,0,0.10)", margin: "0 20px", flexShrink: 0 }} />
 
         {/* Social Icons */}
         <div style={{ display: "flex", alignItems: "center", gap: "16px", flexShrink: 0 }}>
@@ -467,13 +471,25 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
 
         /* Responsive */
         @media (max-width: 1024px) {
+          #home {
+            height: auto !important;
+            min-height: 100vh !important;
+            overflow: visible !important;
+          }
           .hero-grid {
             grid-template-columns: 1fr !important;
           }
           .hero-text-container {
-            padding: 115px 24px 45px 24px !important;
+            padding: 110px 24px 40px 24px !important;
             text-align: center !important;
             align-items: center !important;
+          }
+          .hero-bg-img {
+            object-position: 82% center !important; /* Positions building on right into center view on mobile */
+          }
+          .hero-fog-overlay {
+            width: 100% !important;
+            background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.15) 100%) !important;
           }
         }
         @media (max-width: 768px) {
@@ -481,11 +497,24 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
             grid-template-columns: repeat(2, 1fr) !important;
           }
           .hero-infobar {
-            flex-wrap: wrap;
-            gap: 10px !important;
-            padding: 12px 16px !important;
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 16px !important;
+            padding: 20px 24px !important;
+            border-radius: 20px !important;
             width: calc(100% - 24px) !important;
             margin: 0 12px 14px !important;
+          }
+          .infobar-divider {
+            display: none !important;
+          }
+          .infobar-address-text {
+            white-space: normal !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .hero-text-container {
+            padding: 95px 16px 30px 16px !important;
           }
         }
       `}</style>

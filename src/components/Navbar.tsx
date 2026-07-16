@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
+import { Menu, X, ArrowRight, ChevronDown, Home, Info, BookOpen, Image as ImageIcon, Phone } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -409,6 +409,25 @@ export default function Navbar({
               Admission Form
               <ArrowRight size={15} strokeWidth={2.5} />
             </motion.button>
+
+            {/* Hamburger button for mobile / tablet drawer */}
+            <button
+              onClick={() => setMobileOpen(true)}
+              className="hamburger-btn"
+              style={{
+                background: "rgba(67, 69, 158, 0.08)",
+                border: "none",
+                borderRadius: "12px",
+                padding: "10px",
+                cursor: "pointer",
+                display: "none",
+                alignItems: "center",
+                justifyContent: "center",
+                transition: "all 0.2s ease",
+              }}
+            >
+              <Menu size={24} color="#43459E" />
+            </button>
           </div>
         </div>
       </motion.header>
@@ -635,6 +654,89 @@ export default function Navbar({
         )}
       </AnimatePresence>
 
+      {/* ── Mobile Bottom Navigation Bar ── */}
+      <div
+        className="mobile-bottom-nav"
+        style={{
+          position: "fixed",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "64px",
+          background: "rgba(255, 255, 255, 0.85)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderTop: "1px solid rgba(0, 0, 0, 0.08)",
+          boxShadow: "0 -4px 20px rgba(0, 0, 0, 0.04)",
+          display: "none",
+          justifyContent: "space-around",
+          alignItems: "center",
+          padding: "0 8px",
+          zIndex: 150,
+          boxSizing: "border-box",
+        }}
+      >
+        {[
+          { label: "Home", href: "/", icon: Home },
+          { label: "About", href: "/about", icon: Info },
+          { label: "Academics", href: "/academics", icon: BookOpen },
+          { label: "Gallery", href: "/gallery", icon: ImageIcon },
+          { label: "Contact", href: "/contact", icon: Phone },
+        ].map((link) => {
+          const Icon = link.icon;
+          const isActive = activeLink === link.label;
+          return (
+            <a
+              key={link.label}
+              href={link.href}
+              onClick={() => {
+                setActiveLink(link.label);
+              }}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "4px",
+                textDecoration: "none",
+                color: isActive ? "#43459E" : "#6B7280",
+                fontSize: "0.72rem",
+                fontWeight: isActive ? 800 : 600,
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                width: "60px",
+                height: "100%",
+                position: "relative",
+                transition: "color 0.25s ease",
+              }}
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="mobileActiveTabIndicator"
+                  style={{
+                    position: "absolute",
+                    top: "0px",
+                    width: "40px",
+                    height: "4px",
+                    background: "#43459E",
+                    borderRadius: "0 0 4px 4px",
+                  }}
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <Icon
+                size={20}
+                strokeWidth={isActive ? 2.5 : 2}
+                style={{
+                  transition: "transform 0.2s ease",
+                  transform: isActive ? "scale(1.1)" : "scale(1)",
+                }}
+              />
+              <span>{link.label}</span>
+            </a>
+          );
+        })}
+      </div>
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap');
 
@@ -656,24 +758,23 @@ export default function Navbar({
             padding: 0 16px !important;
             justify-content: space-between !important;
           }
+          .hamburger-btn {
+            display: flex !important;
+          }
         }
 
         @media (max-width: 768px) {
           .nav-links-desktop {
-            gap: 1px !important;
+            display: none !important;
           }
-          .nav-links-desktop a, .nav-links-desktop button {
-            padding: 6px 10px !important;
-            font-size: 0.82rem !important;
+          .mobile-bottom-nav {
+            display: flex !important;
           }
         }
 
         @media (max-width: 640px) {
           .logo-text span:first-child { font-size: 0.82rem !important; }
           .logo-text span:last-child { font-size: 0.55rem !important; }
-          .nav-links-desktop {
-            display: none !important; /* Hide links on extremely small screens to avoid overflow */
-          }
         }
 
         @media (max-width: 360px) {
