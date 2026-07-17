@@ -25,9 +25,9 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={ref}
+      className="section-soft"
       style={{
         height: "100vh",
-        background: "#F8FAFF",
         display: "flex",
         alignItems: "center",
         position: "relative",
@@ -76,14 +76,11 @@ export default function ContactSection() {
               return (
                 <motion.div
                   key={i}
-                  whileHover={{ x: 6, boxShadow: `0 8px 28px rgba(67,69,158,0.1)`, borderColor: `${item.color}40` }}
+                  className="light-card"
+                  whileHover={{ x: 6 }}
                   style={{
                     display: "flex", alignItems: "flex-start", gap: 16,
                     padding: "18px 20px",
-                    background: "#ffffff",
-                    borderRadius: 18,
-                    border: "1.5px solid #E5E7EB",
-                    transition: "all 0.35s cubic-bezier(0.22,1,0.36,1)",
                     cursor: "default",
                   }}
                 >
@@ -116,12 +113,9 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
+            className="registration-modal-content"
             style={{
-              background: "#ffffff",
-              borderRadius: 28,
               padding: "40px",
-              border: "1.5px solid #E5E7EB",
-              boxShadow: "0 20px 60px rgba(67,69,158,0.06)",
             }}
           >
             <h3 style={{ fontFamily: "'Merriweather', Georgia, serif", fontSize: "1.4rem", fontWeight: 800, color: "#43459E", marginBottom: 6 }}>

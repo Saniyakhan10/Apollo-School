@@ -106,13 +106,9 @@ export default function CampusSection() {
                 whileHover={{ y: -10 }}
                 className="campus-card"
                 style={{
-                  background: "#ffffff",
                   borderRadius: "24px",
                   overflow: "hidden",
-                  border: "1.5px solid #E5E7EB",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.06)",
                   cursor: "default",
-                  transition: "all 0.4s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
                 {/* Image */}

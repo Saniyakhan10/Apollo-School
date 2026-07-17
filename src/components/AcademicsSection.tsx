@@ -63,9 +63,9 @@ export default function AcademicsSection() {
     <section
       id="academics"
       ref={ref}
+      className="section-soft"
       style={{
         padding: "96px 0",
-        background: "#F8FAFF",
         position: "relative",
         overflow: "hidden",
         width: "100%",
@@ -112,8 +112,10 @@ export default function AcademicsSection() {
                   display: "flex", alignItems: "center", gap: 10,
                   padding: "12px 24px",
                   borderRadius: 50,
-                  border: isActive ? `2px solid ${lvl.color}` : "2px solid #E5E7EB",
-                  background: isActive ? "#43459E" : "#ffffff",
+                  border: isActive ? `2px solid ${lvl.color}` : "1px solid rgba(255, 255, 255, 0.50)",
+                  background: isActive ? "#43459E" : "rgba(255, 255, 255, 0.35)",
+                  backdropFilter: "blur(16px)",
+                  WebkitBackdropFilter: "blur(16px)",
                   color: isActive ? "#fff" : "#4B5563",
                   fontFamily: "'Plus Jakarta Sans', sans-serif",
                   fontWeight: 700,
@@ -148,10 +150,12 @@ export default function AcademicsSection() {
             className="academics-panel"
             style={{
               display: "grid", gridTemplateColumns: "1.2fr 0.8fr", gap: 40,
-              background: "#ffffff",
+              background: "rgba(255, 255, 255, 0.22)",
+              backdropFilter: "blur(32px)",
+              WebkitBackdropFilter: "blur(32px)",
               borderRadius: 28,
-              border: `1.5px solid ${current.color}30`,
-              boxShadow: `0 20px 60px rgba(67,69,158,0.08), 0 0 0 1px ${current.color}15`,
+              border: "1px solid rgba(255, 255, 255, 0.50)",
+              boxShadow: "0 20px 60px rgba(67,69,158,0.08)",
               overflow: "hidden",
             }}
           >

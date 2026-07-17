@@ -818,21 +818,21 @@ export default function StreamsPage() {
               exit={{ opacity: 0, scale: 0.94 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
+              className="registration-modal-content"
               style={{
-                background: "#ffffff",
-                borderRadius: 24,
                 width: "min(800px, 96vw)",
                 maxHeight: "90vh",
                 overflowY: "auto",
-                boxShadow: "0 32px 80px rgba(0,0,0,0.18)",
               }}
             >
               {/* Modal header */}
               <div style={{
                 padding: "28px 32px",
-                borderBottom: "1px solid #F0F0F0",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                 display: "flex", alignItems: "center", justifyContent: "space-between",
-                position: "sticky", top: 0, background: "#ffffff",
+                position: "sticky", top: 0, background: "rgba(255, 255, 255, 0.22)",
+                backdropFilter: "blur(32px)",
+                WebkitBackdropFilter: "blur(32px)",
                 borderRadius: "24px 24px 0 0",
                 zIndex: 10,
               }}>
@@ -1073,18 +1073,17 @@ export default function StreamsPage() {
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
+              className="registration-modal-content"
               style={{
-                background: "#ffffff",
-                borderRadius: 24,
                 width: "min(560px, 96vw)",
-                maxHeight: "92vh", overflowY: "auto",
-                boxShadow: "0 32px 80px rgba(0,0,0,0.18)",
+                maxHeight: "92vh",
+                overflowY: "auto",
               }}
             >
               {/* Form header */}
               <div style={{
                 padding: "28px 32px 24px",
-                borderBottom: "1px solid #F0F0F0",
+                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
                 display: "flex", alignItems: "flex-start", justifyContent: "space-between",
               }}>
                 <div>

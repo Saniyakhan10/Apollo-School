@@ -30,9 +30,9 @@ export default function ContactHomeSection() {
   return (
     <section
       id="contact-home"
+      className="section-light"
       style={{
         padding: "72px 0",
-        background: "#ffffff",
       }}
     >
       <div className="container">
@@ -143,10 +143,7 @@ export default function ContactHomeSection() {
           </div>
 
           {/* RIGHT — Form */}
-          <div style={{
-            background: "#ffffff",
-            borderRadius: "20px",
-            border: "1.5px solid #E5E7EB",
+          <div className="registration-modal-content" style={{
             overflow: "hidden",
           }}>
             {/* Form header strip */}
@@ -173,13 +170,13 @@ export default function ContactHomeSection() {
               ) : (
                 <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "14px" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }} className="chs-row">
-                    <input placeholder="Full Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required style={inputStyle} />
-                    <input type="email" placeholder="Email Address" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required style={inputStyle} />
+                    <input className="contact-input" placeholder="Full Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} required style={inputStyle} />
+                    <input className="contact-input" type="email" placeholder="Email Address" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required style={inputStyle} />
                   </div>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "14px" }} className="chs-row">
-                    <input type="tel" placeholder="Phone Number" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} style={inputStyle} />
+                    <input className="contact-input" type="tel" placeholder="Phone Number" value={form.phone} onChange={e => setForm({ ...form, phone: e.target.value })} style={inputStyle} />
                     <div style={{ position: "relative" }}>
-                      <select value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} required style={{ ...inputStyle, appearance: "none", cursor: "pointer" }}>
+                      <select className="contact-input" value={form.subject} onChange={e => setForm({ ...form, subject: e.target.value })} required style={{ ...inputStyle, appearance: "none", cursor: "pointer" }}>
                         <option value="" disabled>Select Subject</option>
                         <option>Admission Enquiry</option>
                         <option>Fee Structure</option>
@@ -191,6 +188,7 @@ export default function ContactHomeSection() {
                     </div>
                   </div>
                   <textarea
+                    className="contact-input"
                     placeholder="Your message..."
                     rows={3}
                     value={form.message}

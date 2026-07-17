@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useInView } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
+import { ArrowRight, X } from "lucide-react";
 
 const curriculums = [
   {
@@ -51,6 +51,7 @@ const curriculums = [
 export default function CurriculumsSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string; grades: string } | null>(null);
 
   return (
     <section
@@ -93,7 +94,11 @@ export default function CurriculumsSection() {
                 }}
                 className="curriculum-row"
               >
-                <CurriculumImage item={item} className="curriculum-img-col" />
+                <CurriculumImage
+                  item={item}
+                  className="curriculum-img-col"
+                  onImageClick={() => setSelectedImage({ src: item.image, alt: item.level, grades: item.grades })}
+                />
                 <CurriculumContent item={item} inView={inView} i={i} className="curriculum-text-col" />
               </motion.div>
             );
@@ -114,6 +119,85 @@ export default function CurriculumsSection() {
           </a>
         </motion.div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 1000,
+              background: "rgba(0,0,0,0.9)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "24px",
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.85 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.85 }}
+              transition={{ duration: 0.3 }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                position: "relative",
+                width: "min(90vw, 900px)",
+                height: "min(80vh, 600px)",
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: "0 40px 80px rgba(0,0,0,0.5)",
+              }}
+            >
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="90vw"
+                quality={95}
+              />
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                padding: "24px",
+              }}>
+                <p style={{ fontFamily: "'Merriweather',Georgia,serif", fontWeight: 900, fontSize: "1.10rem", color: "#fff" }}>
+                  {selectedImage.alt} ({selectedImage.grades})
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedImage(null)}
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.15)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  color: "#fff",
+                }}
+              >
+                <X size={18} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <style>{`
         .curriculum-image-container {
@@ -143,10 +227,10 @@ export default function CurriculumsSection() {
   );
 }
 
-function CurriculumImage({ item, className }: { item: typeof curriculums[0]; className?: string }) {
+function CurriculumImage({ item, className, onImageClick }: { item: typeof curriculums[0]; className?: string; onImageClick: () => void }) {
   return (
     <div style={{ position: "relative" }} className={className}>
-      <div className="curriculum-image-container">
+      <div className="curriculum-image-container" onClick={onImageClick} style={{ cursor: "pointer" }}>
         <Image
           src={item.image}
           alt={item.level}

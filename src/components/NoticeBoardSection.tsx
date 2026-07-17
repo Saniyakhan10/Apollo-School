@@ -99,12 +99,9 @@ export default function NoticeBoardSection() {
           }}
         >
           {/* Main Board Container */}
-          <div style={{
-            background: "#ffffff",
+          <div className="registration-modal-content" style={{
             borderRadius: "28px",
-            boxShadow: "0 15px 45px rgba(67, 69, 158, 0.08)",
             overflow: "hidden",
-            border: "1px solid rgba(67, 69, 158, 0.08)",
             position: "relative",
           }}>
             {/* Header bar */}
@@ -339,8 +336,10 @@ export default function NoticeBoardSection() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
               style={{
-                background: "#ffffff", borderRadius: "20px",
-                width: "min(520px, 95vw)", overflow: "hidden",
+                background: "#ffffff",
+                borderRadius: "20px",
+                width: "min(520px, 95vw)",
+                overflow: "hidden",
                 boxShadow: "0 40px 80px rgba(0,0,0,0.2)",
                 borderTop: `5px solid ${popup.color}`,
               }}
@@ -357,7 +356,7 @@ export default function NoticeBoardSection() {
                   </button>
                 </div>
                 <h3 style={{ fontFamily: "'Merriweather',Georgia,serif", fontWeight: 900, fontSize: "1.1rem", color: "#1F2937", marginBottom: "14px", lineHeight: 1.4 }}>{popup.title}</h3>
-                <div style={{ background: "#F9FAFB", borderRadius: "12px", padding: "16px 18px", borderLeft: `4px solid ${popup.color}` }}>
+                <div className="light-card" style={{ borderRadius: "12px", padding: "16px 18px", borderLeft: `4px solid ${popup.color}` }}>
                   <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.9rem", color: "#374151", lineHeight: 1.85 }}>{popup.full}</p>
                 </div>
                 <div style={{ marginTop: "18px", display: "flex", justifyContent: "flex-end" }}>

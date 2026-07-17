@@ -19,7 +19,8 @@ export default function AboutHomeSection() {
     <section
       ref={ref}
       id="about-home"
-      style={{ background: "#ffffff", padding: "80px 0", overflow: "hidden" }}
+      className="section-light"
+      style={{ padding: "80px 0", overflow: "hidden" }}
     >
       <div className="container">
         <div
@@ -93,12 +94,11 @@ export default function AboutHomeSection() {
                   initial={{ opacity: 0, x: 16 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.07 }}
+                  className="light-card"
                   style={{
                     display: "flex", alignItems: "center", gap: "10px",
                     padding: "11px 15px",
-                    background: "#F9FAFB",
                     borderRadius: "12px",
-                    border: "1px solid #E5E7EB",
                   }}
                 >
                   <CheckCircle2 size={16} color="#43459E" strokeWidth={2.5} style={{ flexShrink: 0 }} />

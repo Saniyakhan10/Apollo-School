@@ -22,8 +22,6 @@ const socialLinks = [
 export default function Footer() {
   return (
     <footer style={{
-      background: "#0A1628",
-      backgroundColor: "#0A1628",
       color: "#ffffff",
       paddingTop: "72px",
     }}>

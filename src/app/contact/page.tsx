@@ -197,17 +197,12 @@ export default function ContactPage() {
         }}>
           <div className="container" style={{ padding: 0, maxWidth: "1000px" }}>
             <div style={{
-              background: "rgba(255, 255, 255, 0.90)",
-              backdropFilter: "blur(24px)",
-              borderRadius: "16px",
-              border: "1px solid rgba(255, 255, 255, 0.5)",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
               padding: "16px 20px",
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
               gap: "12px",
               textAlign: "center",
-            }} className="contact-stats-grid">
+            }} className="contact-stats-grid glass-stats-bar">
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
                 <div style={{ fontFamily: "'Merriweather', serif", fontSize: "1.45rem", fontWeight: 900, color: "#43459E" }}>CBSE</div>
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#6B7280" }}>Board Affiliation</div>

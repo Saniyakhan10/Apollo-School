@@ -5,8 +5,9 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import RegistrationForm from "@/components/RegistrationForm";
 import MemoriesSection from "@/components/MemoriesSection";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 const galleryAlbums = [
   { title: "Annual Sports Day 2024", count: "32 photos", cover: "/gallery/event-sports.jpg" },
@@ -23,6 +24,7 @@ const galleryAlbums = [
 
 export default function GalleryPage() {
   const [formOpen, setFormOpen] = useState(false);
+  const [selectedAlbum, setSelectedAlbum] = useState<{ src: string; title: string } | null>(null);
 
   return (
     <main style={{ background: "#ffffff" }}>
@@ -113,17 +115,12 @@ export default function GalleryPage() {
         }}>
           <div className="container" style={{ padding: 0, maxWidth: "1000px" }}>
             <div style={{
-              background: "rgba(255, 255, 255, 0.90)",
-              backdropFilter: "blur(24px)",
-              borderRadius: "16px",
-              border: "1px solid rgba(255, 255, 255, 0.5)",
-              boxShadow: "0 10px 30px rgba(0, 0, 0, 0.05)",
               padding: "16px 20px",
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
               gap: "12px",
               textAlign: "center",
-            }} className="gallery-stats-grid">
+            }} className="gallery-stats-grid glass-stats-bar">
               <div style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
                 <div style={{ fontFamily: "'Merriweather', serif", fontSize: "1.45rem", fontWeight: 900, color: "#43459E" }}>CBSE</div>
                 <div style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.78rem", fontWeight: 700, color: "#6B7280" }}>Board Affiliation</div>
@@ -176,11 +173,13 @@ export default function GalleryPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.5, delay: i * 0.05 }}
+                  onClick={() => setSelectedAlbum({ src: album.cover, title: album.title })}
                   className="light-card"
                   style={{
                     overflow: "hidden",
                     display: "flex",
                     flexDirection: "column",
+                    cursor: "pointer",
                   }}
                 >
                   <div style={{ position: "relative", width: "100%", height: "240px", overflow: "hidden" }}>
@@ -188,7 +187,7 @@ export default function GalleryPage() {
                       src={album.cover}
                       alt={album.title}
                       fill
-                      style={{ objectFit: "cover" }}
+                      style={{ objectFit: "cover", transition: "transform 0.5s cubic-bezier(0.22, 1, 0.36, 1)" }}
                       sizes="(max-width:768px) 100vw, 33vw"
                       quality={90}
                     />
@@ -207,6 +206,85 @@ export default function GalleryPage() {
         {/* Reuse memories grid */}
         <MemoriesSection />
       </motion.div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {selectedAlbum && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedAlbum(null)}
+            style={{
+              position: "fixed",
+              inset: 0,
+              zIndex: 1000,
+              background: "rgba(0,0,0,0.9)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "24px",
+            }}
+          >
+            <motion.div
+              initial={{ scale: 0.85 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0.85 }}
+              transition={{ duration: 0.3 }}
+              onClick={e => e.stopPropagation()}
+              style={{
+                position: "relative",
+                width: "min(90vw, 900px)",
+                height: "min(80vh, 600px)",
+                borderRadius: "20px",
+                overflow: "hidden",
+                boxShadow: "0 40px 80px rgba(0,0,0,0.5)",
+              }}
+            >
+              <Image
+                src={selectedAlbum.src}
+                alt={selectedAlbum.title}
+                fill
+                style={{ objectFit: "cover" }}
+                sizes="90vw"
+                quality={95}
+              />
+              <div style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%)",
+                padding: "24px",
+              }}>
+                <p style={{ fontFamily: "'Merriweather',Georgia,serif", fontWeight: 900, fontSize: "1.10rem", color: "#fff" }}>
+                  {selectedAlbum.title}
+                </p>
+              </div>
+              <button
+                onClick={() => setSelectedAlbum(null)}
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  width: 40,
+                  height: 40,
+                  borderRadius: "50%",
+                  background: "rgba(255,255,255,0.15)",
+                  border: "1px solid rgba(255,255,255,0.3)",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                  color: "#fff",
+                }}
+              >
+                <X size={18} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <Footer />
       <RegistrationForm isOpen={formOpen} onClose={() => setFormOpen(false)} />

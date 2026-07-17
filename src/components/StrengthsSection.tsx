@@ -84,14 +84,11 @@ export default function StrengthsSection() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="strength-card"
                 style={{
-                  background: "#ffffff",
                   borderRadius: "20px",
                   padding: "36px 28px",
-                  border: "1.5px solid rgba(67, 69, 158, 0.2)",
                   cursor: "default",
                   position: "relative",
                   overflow: "hidden",
-                  transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
                 }}
               >
                 {/* Thin colored left border accent — no gradient */}

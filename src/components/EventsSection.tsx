@@ -192,14 +192,14 @@ export default function EventsSection() {
                 animate={inView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.45, delay: i * 0.06 }}
                 onClick={() => setSelectedEvent(ev)}
+                className="event-card"
                 style={{
-                  flexShrink: 0, width: "200px",
-                  background: "#ffffff",
-                  borderRadius: "16px", overflow: "hidden",
-                  position: "relative", cursor: "pointer",
-                  border: "1px solid #E5E7EB",
-                  boxShadow: "0 6px 16px rgba(0,0,0,0.04)",
-                  transition: "all 0.4s cubic-bezier(0.22,1,0.36,1)",
+                  flexShrink: 0,
+                  width: "200px",
+                  borderRadius: "16px",
+                  overflow: "hidden",
+                  position: "relative",
+                  cursor: "pointer",
                 }}
                 whileHover={{
                   y: -8,
@@ -449,13 +449,10 @@ export default function EventsSection() {
                 </div>
 
                 {/* Venue & Time Info Cards Row */}
-                <div style={{ 
+                <div className="light-card" style={{ 
                   display: "flex", 
                   gap: "20px", 
                   padding: "14px 18px", 
-                  background: "#F9FAFB", 
-                  borderRadius: "14px", 
-                  border: "1px solid #F0F0F0",
                   marginBottom: "20px"
                 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: "8px", flex: 1 }}>
