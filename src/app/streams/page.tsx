@@ -308,7 +308,35 @@ export default function StreamsPage() {
         minHeight: "calc(100vh - 0px)",
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
       }}>
+        {/* Background Image Layer with Ken Burns zoom animation */}
+        <div style={{ position: "absolute", inset: 0, zIndex: 0, overflow: "hidden" }}>
+          <motion.div
+            initial={{ scale: 1.15, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 2.2, ease: "easeOut" }}
+            style={{ position: "relative", width: "100%", height: "100%" }}
+          >
+            <Image
+              src="/streams_hero_new.png"
+              alt="Students choosing streams background"
+              fill
+              priority
+              style={{
+                objectFit: "cover",
+                objectPosition: "center center",
+              }}
+            />
+          </motion.div>
+          {/* Light gradient overlay for text legibility and soft blend */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "linear-gradient(to right, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.5) 45%, rgba(255, 255, 255, 0) 100%)",
+          }} />
+        </div>
+
         {/* Dot grid decor */}
         <div
           style={{
@@ -318,8 +346,9 @@ export default function StreamsPage() {
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             gap: "12px",
-            opacity: 0.2,
+            opacity: 0.15,
             pointerEvents: "none",
+            zIndex: 1,
           }}
         >
           {[...Array(16)].map((_, i) => (
@@ -335,120 +364,114 @@ export default function StreamsPage() {
         <FloatingDoodle icon={GraduationCap} top="75%" left="5%" size={38} color="#62C5D2" delay={1.5} duration={7} />
         <FloatingDoodle icon={Calculator} top="22%" left="42%" size={30} color="#43459E" delay={0.5} duration={5.5} />
         <FloatingDoodle icon={Sparkles} top="52%" left="2%" size={26} color="#62C5D2" delay={2} duration={5} />
-        
         <FloatingDoodle icon={Globe} top="12%" left="86%" size={40} color="#43459E" delay={1} duration={6.5} />
         <FloatingDoodle icon={Compass} top="58%" left="92%" size={36} color="#62C5D2" delay={2.5} duration={8} />
         <FloatingDoodle icon={Palette} top="82%" left="84%" size={34} color="#43459E" delay={0.8} duration={6} />
         <FloatingDoodle icon={Smile} top="32%" left="78%" size={30} color="#62C5D2" delay={1.8} duration={7} />
-        {/* Right image — absolute, fills right 50% full height with padding */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          style={{
-            position: "absolute",
-            top: 0, right: 0,
-            width: "50%",
-            height: "100%",
-            pointerEvents: "none",
-            paddingRight: "clamp(24px, 4vw, 80px)",
-            paddingTop: "40px",
-            paddingBottom: "40px",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
+
+        {/* Content container overlay */}
+        <div className="container" style={{ position: "relative", zIndex: 2, flexGrow: 1, display: "flex", alignItems: "center" }}>
+          <div style={{
+            maxWidth: "640px",
+            width: "100%",
+            paddingLeft: "clamp(24px, 4vw, 80px)",
+            paddingRight: "24px",
+            paddingTop: "80px",
+            paddingBottom: "80px",
             boxSizing: "border-box",
-          }}
-          className="hero-right-img"
-        >
-          <div style={{ position: "relative", width: "100%", height: "100%", background: "#ffffff" }}>
-            {/* Hand drawn stars and sparkles floating around image */}
-            <HandDrawnStar size={26} top="8%" right="18%" color="#43459E" delay={0} />
-            <HandDrawnStar size={34} top="28%" right="5%" color="#62C5D2" delay={1} />
-            <HandDrawnSparkle size={24} top="48%" right="12%" color="#43459E" delay={1.8} />
-            <HandDrawnSparkle size={30} top="20%" left="8%" color="#62C5D2" delay={0.6} />
-            <HandDrawnStar size={28} bottom="15%" left="15%" color="#43459E" delay={2.2} />
-
-            <Image
-              src="https://t3.ftcdn.net/jpg/09/28/53/10/360_F_928531048_45ay4GSNYJuTLIHKtuR255O9ndjsHg5x.jpg"
-              alt="Students choosing streams"
-              fill
-              unoptimized
-              style={{
-                objectFit: "contain",
-                objectPosition: "right center",
-                mixBlendMode: "multiply",
-                filter: "contrast(1.08) brightness(1.04)",
-              }}
-            />
-          </div>
-        </motion.div>
-
-        {/* Left side — text content, takes only left 50% */}
-        <div style={{
-          width: "50%",
-          paddingLeft: "clamp(24px, 4vw, 80px)",
-          paddingRight: "40px",
-          paddingTop: 80,
-          paddingBottom: 60,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          flexGrow: 1,
-          position: "relative",
-          zIndex: 1,
-        }} className="hero-left">
-          <motion.div
-            initial={{ opacity: 0, x: -24 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="section-tag">✦ Career Pathway · 2025–26</span>
-            <h1 style={{
-              fontFamily: "'Merriweather', Georgia, serif",
-              fontSize: "clamp(2rem, 3.2vw, 3.2rem)",
-              fontWeight: 900,
-              color: "#111827",
-              lineHeight: 1.2,
-              marginTop: 16,
-              marginBottom: 18,
-              letterSpacing: "-0.5px",
-            }}>
-              Choose Your Stream.<br />
-              <span style={{ color: "#43459E" }}>Shape Your Future.</span>
-            </h1>
-            <p style={{
-              fontFamily: "'Plus Jakarta Sans', sans-serif",
-              fontSize: "1rem",
-              color: "#6B7280",
-              lineHeight: 1.8,
-              maxWidth: 440,
-              marginBottom: 36,
-            }}>
-              Apollo Convent offers three streams in Career Pathway — Mathematics, Biology and Commerce.
-              Explore each stream, understand subjects and career options, then register your preference.
-            </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-              <button
-                onClick={() => setFormOpen(true)}
-                className="btn-primary"
-                style={{ color: "#fff" }}
+          }}>
+            <div>
+              {/* Badge tag */}
+              <motion.span
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8,
+                  padding: "6px 16px", borderRadius: 9999,
+                  background: "rgba(67, 69, 158, 0.08)",
+                  border: "1px solid rgba(67, 69, 158, 0.15)",
+                  color: "#2A2C76",
+                  fontFamily: "'Plus Jakarta Sans',sans-serif",
+                  fontSize: "0.74rem", fontWeight: 700,
+                  letterSpacing: "0.1em", textTransform: "uppercase",
+                  marginBottom: 20,
+                }}
               >
-                Register Preference <ArrowRight size={16} />
-              </button>
-              <a href="#streams" className="btn-secondary" style={{ textDecoration: "none" }}>
-                Explore Streams
-              </a>
-            </div>
-          </motion.div>
-        </div>
+                ✦ Career Pathway · 2025–26
+              </motion.span>
 
-        <style>{`
-          @media(max-width:768px){
-            .hero-left { width: 100% !important; padding-right: 24px !important; }
-            .hero-right-img { display: none !important; }
-          }
-        `}</style>
+              {/* Main Heading */}
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.12, ease: [0.215, 0.610, 0.355, 1] }}
+                style={{
+                  fontFamily: "'Merriweather', Georgia, serif",
+                  fontSize: "clamp(2.2rem, 4.2vw, 3.8rem)",
+                  fontWeight: 900,
+                  color: "#000000",
+                  lineHeight: 1.25,
+                  marginTop: 16,
+                  marginBottom: 22,
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                Choose Your Stream.<br />
+                <span style={{ color: "#2A2C76" }}>Shape Your Future.</span>
+              </motion.h1>
+
+              {/* Paragraph Description */}
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.28, ease: "easeOut" }}
+                style={{
+                  fontFamily: "'Plus Jakarta Sans', sans-serif",
+                  fontSize: "1.08rem",
+                  color: "#1F2937",
+                  lineHeight: 1.85,
+                  marginBottom: 38,
+                }}
+              >
+                Apollo Convent offers three streams in Career Pathway — Mathematics, Biology and Commerce.
+                Explore each stream, understand subjects and career options, then register your preference.
+              </motion.p>
+
+              {/* Action buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.42 }}
+                style={{ display: "flex", gap: 14, flexWrap: "wrap" }}
+              >
+                <motion.button
+                  onClick={() => setFormOpen(true)}
+                  whileHover={{ y: -2, background: "#1F2156", boxShadow: "0 12px 30px rgba(67,69,158,0.3)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-primary"
+                  style={{ color: "#ffffff", background: "#2A2C76", border: "none" }}
+                >
+                  Register Preference <ArrowRight size={16} />
+                </motion.button>
+                <motion.a
+                  href="#streams"
+                  whileHover={{ y: -2, background: "rgba(67, 69, 158, 0.08)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="btn-secondary"
+                  style={{
+                    textDecoration: "none",
+                    color: "#2A2C76",
+                    borderColor: "#2A2C76",
+                    background: "transparent",
+                  }}
+                >
+                  Explore Streams
+                </motion.a>
+              </motion.div>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ══════════════════════════════════════════════════════════
@@ -678,7 +701,7 @@ export default function StreamsPage() {
 
           <div style={{ overflowX: "auto" }}>
             <table style={{
-              width: "100%", borderCollapse: "collapse",
+              width: "100%", minWidth: "680px", borderCollapse: "collapse",
               fontFamily: "'Plus Jakarta Sans', sans-serif",
             }} className="compare-table">
               <thead>
@@ -806,7 +829,6 @@ export default function StreamsPage() {
             style={{
               position: "fixed", inset: 0, zIndex: 1500,
               background: "rgba(17,24,39,0.45)",
-              backdropFilter: "blur(6px)",
               display: "flex", alignItems: "center", justifyContent: "center",
               padding: "24px",
             }}
@@ -818,7 +840,7 @@ export default function StreamsPage() {
               exit={{ opacity: 0, scale: 0.94 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
-              className="registration-modal-content"
+              className="admission-form-modal"
               style={{
                 width: "min(800px, 96vw)",
                 maxHeight: "90vh",
@@ -828,11 +850,9 @@ export default function StreamsPage() {
               {/* Modal header */}
               <div style={{
                 padding: "28px 32px",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                borderBottom: "1px solid #E5E7EB",
                 display: "flex", alignItems: "center", justifyContent: "space-between",
-                position: "sticky", top: 0, background: "rgba(255, 255, 255, 0.22)",
-                backdropFilter: "blur(32px)",
-                WebkitBackdropFilter: "blur(32px)",
+                position: "sticky", top: 0, background: "#ffffff",
                 borderRadius: "24px 24px 0 0",
                 zIndex: 10,
               }}>
@@ -1062,7 +1082,6 @@ export default function StreamsPage() {
             style={{
               position: "fixed", inset: 0, zIndex: 2000,
               background: "rgba(17,24,39,0.45)",
-              backdropFilter: "blur(6px)",
               display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
             }}
           >
@@ -1073,7 +1092,7 @@ export default function StreamsPage() {
               exit={{ scale: 0.92, opacity: 0 }}
               transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
               onClick={e => e.stopPropagation()}
-              className="registration-modal-content"
+              className="admission-form-modal"
               style={{
                 width: "min(560px, 96vw)",
                 maxHeight: "92vh",
@@ -1082,19 +1101,20 @@ export default function StreamsPage() {
             >
               {/* Form header */}
               <div style={{
-                padding: "28px 32px 24px",
-                borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                padding: "var(--modal-head-pad, 28px 32px 24px)",
+                borderBottom: "1px solid #E5E7EB",
                 display: "flex", alignItems: "flex-start", justifyContent: "space-between",
               }}>
                 <div>
                   <span style={{
                     display: "inline-block", marginBottom: 8,
-                    padding: "4px 12px", borderRadius: 9999,
-                    background: "#F4F4F6",
-                    color: "#9CA3AF",
+                    padding: "6px 14px", borderRadius: 9999,
+                    background: "rgba(67, 69, 158, 0.08)",
+                    border: "1px solid rgba(67, 69, 158, 0.15)",
+                    color: "#43459E",
                     fontFamily: "'Plus Jakarta Sans',sans-serif",
-                    fontSize: "0.7rem", fontWeight: 700,
-                    letterSpacing: "0.1em", textTransform: "uppercase",
+                    fontSize: "0.72rem", fontWeight: 700,
+                    letterSpacing: "0.06em", textTransform: "uppercase",
                   }}>Career Pathway · 2025–26</span>
                   <div style={{
                     fontFamily: "'Merriweather',serif", fontWeight: 900,
@@ -1138,7 +1158,7 @@ export default function StreamsPage() {
                   </p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} style={{ padding: "28px 32px" }}>
+                <form onSubmit={handleSubmit} style={{ padding: "var(--modal-pad, 28px 32px)" }}>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }} className="form-2col">
                     {[
                       { key: "name", label: "Full Name", type: "text", placeholder: "Your name" },
@@ -1283,12 +1303,14 @@ export default function StreamsPage() {
                     </div>
                   )}
 
-                  <button
+                  <motion.button
                     type="submit"
                     disabled={!!validationError}
+                    whileHover={validationError ? {} : { y: -2, background: "#35378A" }}
+                    whileTap={validationError ? {} : { scale: 0.98 }}
                     style={{
-                      width: "100%", padding: "14px 24px", borderRadius: 9999,
-                      background: validationError ? "#9CA3AF" : "#111827",
+                      width: "100%", padding: "14px 24px", borderRadius: 12,
+                      background: validationError ? "#9CA3AF" : "#43459E",
                       color: "#ffffff",
                       fontFamily: "'Plus Jakarta Sans',sans-serif",
                       fontWeight: 700, fontSize: "0.95rem",
@@ -1300,7 +1322,7 @@ export default function StreamsPage() {
                   >
                     <Send size={16} />
                     Submit Registration
-                  </button>
+                  </motion.button>
                 </form>
               )}
             </motion.div>

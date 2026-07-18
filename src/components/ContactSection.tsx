@@ -113,15 +113,30 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 30 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="registration-modal-content"
+            className="admission-form-modal"
             style={{
               padding: "40px",
+              borderRadius: "24px",
             }}
           >
-            <h3 style={{ fontFamily: "'Merriweather', Georgia, serif", fontSize: "1.4rem", fontWeight: 800, color: "#43459E", marginBottom: 6 }}>
+            <h3 style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "1.45rem",
+              fontWeight: 800,
+              color: "#43459E",
+              marginBottom: 6,
+              letterSpacing: "-0.01em"
+            }}>
               Send Us a Message
             </h3>
-            <p style={{ fontSize: "0.88rem", color: "#6B7280", marginBottom: 28, lineHeight: 1.6 }}>
+            <p style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontSize: "0.88rem",
+              fontWeight: 500,
+              color: "#43459E",
+              marginBottom: 28,
+              lineHeight: 1.6
+            }}>
               Have questions? Our team will respond within 24 hours.
             </p>
 
@@ -162,12 +177,12 @@ export default function ContactSection() {
                 </div>
                 <motion.button
                   type="submit"
-                  whileHover={{ y: -2, boxShadow: "0 12px 30px rgba(67,69,158,0.3)" }}
+                  whileHover={{ y: -2, background: "#35378A", boxShadow: "0 12px 30px rgba(67,69,158,0.3)" }}
                   whileTap={{ scale: 0.98 }}
                   style={{
                     display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
                     padding: "14px 28px",
-                    background: "linear-gradient(135deg, #43459E, #62C5D2)",
+                    background: "#43459E",
                     color: "#fff",
                     fontFamily: "'Plus Jakarta Sans', sans-serif",
                     fontSize: "1rem", fontWeight: 700,

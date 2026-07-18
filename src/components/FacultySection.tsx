@@ -128,59 +128,74 @@ export default function FacultySection() {
               key={i}
               initial={{ opacity: 0, y: 28 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -8, scale: 1.02 }}
               onClick={() => setSelectedTeacher(f)}
-              className="light-card faculty-card-hover"
-              style={{
-                padding: "28px 24px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                gap: "12px",
-                cursor: "pointer",
-                transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
-              }}
+              className="faculty-card-wrapper"
+              style={{ display: "flex", flexDirection: "column" }}
             >
-              {/* Avatar without colorful gradient ring */}
-              <div style={{
-                position: "relative",
-                width: 92,
-                height: 92,
-                borderRadius: "50%",
-                overflow: "hidden",
-                border: "4px solid #ffffff",
-                boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
-                background: "#E5E7EB",
-              }}>
-                <Image src={f.image} alt={f.name} fill style={{ objectFit: "cover" }} sizes="92px" quality={95} />
-              </div>
+              <div
+                className="light-card faculty-card-hover"
+                style={{
+                  padding: "28px 24px",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  gap: "12px",
+                  cursor: "pointer",
+                  height: "100%",
+                  transition: "all 0.3s cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              >
+                {/* Avatar without colorful gradient ring */}
+                <div style={{
+                  position: "relative",
+                  width: 92,
+                  height: 92,
+                  borderRadius: "50%",
+                  overflow: "hidden",
+                  border: "4px solid #ffffff",
+                  boxShadow: "0 8px 20px rgba(0,0,0,0.08)",
+                  background: "#E5E7EB",
+                }}>
+                  <Image
+                    src={f.image}
+                    alt={f.name}
+                    fill
+                    style={{ objectFit: "cover", transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)" }}
+                    sizes="92px"
+                    quality={95}
+                  />
+                </div>
 
-              {/* Subject badge */}
-              <div style={{
-                display: "inline-flex", alignItems: "center", gap: "5px",
-                padding: "4px 12px",
-                background: "rgba(67,69,158,0.07)",
-                borderRadius: "9999px",
-              }}>
-                <GraduationCap size={11} color="#43459E" />
-                <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.7rem", fontWeight: 700, color: "#43459E" }}>{f.subject}</span>
-              </div>
+                {/* Subject badge */}
+                <div style={{
+                  display: "inline-flex", alignItems: "center", gap: "5px",
+                  padding: "4px 12px",
+                  background: "rgba(67,69,158,0.07)",
+                  borderRadius: "9999px",
+                }}>
+                  <GraduationCap size={11} color="#43459E" />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.7rem", fontWeight: 700, color: "#43459E" }}>{f.subject}</span>
+                </div>
 
-              <div>
-                <h3 style={{ fontFamily: "'Merriweather',Georgia,serif", fontWeight: 900, fontSize: "0.95rem", color: "#1F2937", marginBottom: "3px" }}>{f.name}</h3>
-                <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.8rem", color: "#6B7280", fontWeight: 600 }}>{f.role}</p>
-              </div>
+                <div>
+                  <h3 style={{ fontFamily: "'Merriweather',Georgia,serif", fontWeight: 900, fontSize: "0.95rem", color: "#1F2937", marginBottom: "3px" }}>{f.name}</h3>
+                  <p style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.8rem", color: "#6B7280", fontWeight: 600 }}>{f.role}</p>
+                </div>
 
-              {/* Experience */}
-              <div style={{
-                display: "flex", alignItems: "center", gap: "5px",
-                padding: "5px 12px",
-                background: "#F9FAFB", borderRadius: "10px",
-                border: "1px solid #E5E7EB",
-              }}>
-                <Star size={12} color="#F8E71C" fill="#F8E71C" />
-                <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#374151" }}>{f.exp} Experience</span>
+                {/* Experience */}
+                <div style={{
+                  display: "flex", alignItems: "center", gap: "5px",
+                  padding: "5px 12px",
+                  background: "#F9FAFB", borderRadius: "10px",
+                  border: "1px solid #E5E7EB",
+                  marginTop: "auto",
+                }}>
+                  <Star size={12} color="#F8E71C" fill="#F8E71C" />
+                  <span style={{ fontFamily: "'Plus Jakarta Sans',sans-serif", fontSize: "0.75rem", fontWeight: 700, color: "#374151" }}>{f.exp} Experience</span>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -408,9 +423,11 @@ export default function FacultySection() {
           .faculty-grid { grid-template-columns: 1fr !important; }
         }
         .faculty-card-hover:hover {
-          transform: translateY(-6px) !important;
           box-shadow: 0 16px 32px rgba(67, 69, 158, 0.1) !important;
           border-color: rgba(67, 69, 158, 0.25) !important;
+        }
+        .faculty-card-wrapper:hover img {
+          transform: scale(1.08) !important;
         }
       `}</style>
     </section>

@@ -398,7 +398,7 @@ footer {
 
 
 
-/* 3. Global Glassmorphic Cards (frosted glass, white border, soft shadows) */
+/* 3. Global Cards (Almost Solid, Minimal glassmorphism) */
 .light-card,
 .strength-card,
 .testimonial-card,
@@ -407,15 +407,15 @@ footer {
 .event-card,
 .view-all-notice-row,
 .notice-grid > div {
-  background: rgba(255, 255, 255, 0.22) !important;
-  backdrop-filter: blur(32px) !important;
-  -webkit-backdrop-filter: blur(32px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.50) !important;
-  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border: 1px solid rgba(0, 0, 0, 0.07) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03) !important;
   transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1) !important;
 }
 
-/* 4. Hover states for glassmorphic cards */
+/* 4. Hover states for cards */
 .light-card:hover,
 .strength-card:hover,
 .testimonial-card.active-card,
@@ -424,27 +424,27 @@ footer {
 .event-card:hover,
 .view-all-notice-row:hover,
 .notice-grid > div:hover {
-  background: rgba(255, 255, 255, 0.40) !important;
-  border-color: rgba(255, 255, 255, 0.60) !important;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12) !important;
+  background: #ffffff !important;
+  border-color: rgba(67, 69, 158, 0.2) !important;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08) !important;
 }
 
-/* 5. Non-active Testimonial cards (translucent card style) */
+/* 5. Non-active Testimonial cards */
 .testimonial-card:not(.active-card) {
-  opacity: 0.55 !important;
-  background: rgba(255, 255, 255, 0.12) !important;
-  border-color: rgba(255, 255, 255, 0.40) !important;
-  backdrop-filter: blur(32px) !important;
-  -webkit-backdrop-filter: blur(32px) !important;
+  opacity: 0.70 !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
 }
 
-/* 6. Notice Board Container Glassmorphic overhaul */
+/* 6. Notice Board Container Overhaul */
 #notices .container > div > div {
-  background: rgba(255, 255, 255, 0.22) !important;
-  backdrop-filter: blur(32px) !important;
-  -webkit-backdrop-filter: blur(32px) !important;
-  border: 8px solid rgba(255, 255, 255, 0.50) !important;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08) !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border: 8px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.06) !important;
 }
 
 /* 7. Category pills and buttons (translucent card style) */
@@ -475,18 +475,18 @@ button[style*="background: #43459E"] {
   border-color: rgba(255, 255, 255, 0.65) !important;
 }
 
-/* 10. Form Input Glass overrides */
+/* 10. Form Input Solid overrides (removed glassmorphism) */
 .contact-input, select.contact-input {
-  background: rgba(255, 255, 255, 0.35) !important;
-  backdrop-filter: blur(16px) !important;
-  -webkit-backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.50) !important;
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1.5px solid #E5E7EB !important;
   color: #1F2937 !important;
 }
 .contact-input:focus, select.contact-input:focus {
-  background: rgba(255, 255, 255, 0.65) !important;
-  border-color: rgba(67, 69, 158, 0.45) !important;
-  box-shadow: 0 0 0 3px rgba(67, 69, 158, 0.1) !important;
+  background: #ffffff !important;
+  border-color: #43459E !important;
+  box-shadow: 0 0 0 3px rgba(67, 69, 158, 0.15) !important;
 }
 
 /* 11. Dark glassmorphism for Footer */
@@ -523,6 +523,22 @@ footer {
   backdrop-filter: blur(32px) !important;
   -webkit-backdrop-filter: blur(32px) !important;
   border: 1px solid rgba(255, 255, 255, 0.55) !important;
+}
+
+.admission-form-modal {
+  background: #ffffff !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: 1px solid #E5E7EB !important;
+  --modal-pad: 24px 28px;
+  --modal-head-pad: 24px 28px 20px;
+}
+
+@media (max-width: 480px) {
+  .admission-form-modal {
+    --modal-pad: 16px 20px !important;
+    --modal-head-pad: 16px 20px 14px !important;
+  }
 }
 
 /* 14. Spacing for Mobile Bottom Navigation Dock & General Fluid Text Adjustments */

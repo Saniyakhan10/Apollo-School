@@ -183,9 +183,11 @@ export default function NoticeBoardSection() {
                   return (
                     <motion.div
                       key={notice.id}
+                      layout
                       initial={{ opacity: 0, y: 16 }}
                       animate={inView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.4, delay: i * 0.05 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                       onClick={() => setPopup(notice)}
                       style={{
                         background: "#ffffff",
@@ -196,11 +198,15 @@ export default function NoticeBoardSection() {
                         alignItems: "center",
                         gap: "16px",
                         cursor: "pointer",
-                        transition: "all 0.25s ease",
                         boxShadow: "0 4px 12px rgba(0,0,0,0.01)",
                         position: "relative",
                       }}
-                      whileHover={{ y: -3, boxShadow: "0 8px 24px rgba(67,69,158,0.08)", borderColor: "rgba(67,69,158,0.15)" }}
+                      whileHover={{
+                        y: -6,
+                        scale: 1.015,
+                        boxShadow: "0 16px 36px rgba(67,69,158,0.1)",
+                        borderColor: "rgba(67,69,158,0.25)"
+                      }}
                     >
                       {/* Red Pushpin Icon rotated */}
                       <div style={{
@@ -288,8 +294,10 @@ export default function NoticeBoardSection() {
               justifyContent: "center",
               paddingBottom: "36px",
             }}>
-              <button
+              <motion.button
                 onClick={() => setViewAllOpen(true)}
+                whileHover={{ y: -3, scale: 1.02, boxShadow: "0 10px 24px rgba(67, 69, 158, 0.35)" }}
+                whileTap={{ scale: 0.98 }}
                 style={{
                   background: "#43459E",
                   color: "#ffffff",
@@ -300,16 +308,14 @@ export default function NoticeBoardSection() {
                   fontSize: "0.95rem",
                   border: "none",
                   cursor: "pointer",
-                  boxShadow: "0 6px 20px rgba(67, 69, 158, 0.25)",
                   display: "inline-flex",
                   alignItems: "center",
                   gap: "8px",
-                  transition: "all 0.2s ease",
                 }}
                 className="view-all-notices-btn"
               >
                 View All Notices
-              </button>
+              </motion.button>
             </div>
           </div>
         </motion.div>

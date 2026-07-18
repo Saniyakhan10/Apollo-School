@@ -113,9 +113,14 @@ export default function CurriculumsSection() {
           style={{ textAlign: "center", marginTop: "64px" }}
         >
           <a href="/academics" style={{ textDecoration: "none" }}>
-            <button className="btn-primary" style={{ color: "#ffffff" }}>
+            <motion.button
+              whileHover={{ y: -3, scale: 1.02, boxShadow: "0 10px 20px rgba(67, 69, 158, 0.3)" }}
+              whileTap={{ scale: 0.98 }}
+              className="btn-primary"
+              style={{ color: "#ffffff" }}
+            >
               View All Academics <ArrowRight size={18} />
-            </button>
+            </motion.button>
           </a>
         </motion.div>
       </div>
@@ -230,19 +235,32 @@ export default function CurriculumsSection() {
 function CurriculumImage({ item, className, onImageClick }: { item: typeof curriculums[0]; className?: string; onImageClick: () => void }) {
   return (
     <div style={{ position: "relative" }} className={className}>
-      <div className="curriculum-image-container" onClick={onImageClick} style={{ cursor: "pointer" }}>
-        <Image
-          src={item.image}
-          alt={item.level}
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="50vw"
-          quality={95}
-        />
+      <motion.div
+        className="curriculum-image-container"
+        onClick={onImageClick}
+        style={{ cursor: "pointer" }}
+        whileHover={{ scale: 1.02 }}
+        transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <motion.div
+          whileHover={{ scale: 1.06 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          style={{ width: "100%", height: "100%", position: "relative" }}
+        >
+          <Image
+            src={item.image}
+            alt={item.level}
+            fill
+            style={{ objectFit: "cover" }}
+            sizes="50vw"
+            quality={95}
+          />
+        </motion.div>
         {/* Colored overlay */}
         <div style={{
           position: "absolute", inset: 0,
           background: `linear-gradient(to top, ${item.color}44 0%, transparent 60%)`,
+          pointerEvents: "none"
         }} />
         {/* Grade badge */}
         <div style={{
@@ -255,10 +273,11 @@ function CurriculumImage({ item, className, onImageClick }: { item: typeof curri
           fontWeight: 800, fontSize: "0.78rem",
           color: item.color,
           letterSpacing: "0.04em",
+          pointerEvents: "none"
         }}>
           {item.grades}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }

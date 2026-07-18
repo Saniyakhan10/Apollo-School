@@ -56,14 +56,14 @@ function GlassFeatureCard({ icon: Icon, title }: { icon: React.ElementType; titl
         textAlign: "center",
         padding: "18px 10px 14px",
         gap: "8px",
-        background: hovered ? "rgba(255,255,255,0.40)" : "rgba(255,255,255,0.22)",
-        backdropFilter: "blur(32px)",
-        WebkitBackdropFilter: "blur(32px)",
+        background: hovered ? "#ffffff" : "rgba(255,255,255,0.95)",
+        backdropFilter: "blur(4px)",
+        WebkitBackdropFilter: "blur(4px)",
         borderRadius: "16px",
-        border: "1px solid rgba(255,255,255,0.50)",
+        border: hovered ? "1px solid rgba(67, 69, 158, 0.2)" : "1px solid rgba(0, 0, 0, 0.07)",
         boxShadow: hovered
-          ? "0 12px 32px rgba(0,0,0,0.12)"
-          : "0 4px 18px rgba(0,0,0,0.05)",
+          ? "0 12px 32px rgba(0,0,0,0.08)"
+          : "0 4px 18px rgba(0,0,0,0.03)",
         cursor: "default",
         transition: "all 0.28s cubic-bezier(0.22,1,0.36,1)",
         transform: hovered ? "translateY(-4px)" : "translateY(0)",
@@ -146,7 +146,12 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           LAYER 1 — FULL-SCREEN BACKGROUND
           Uses the campus background image containing trees, sky, ground and building
       ══════════════════════════════════════════════════ */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
+      <motion.div
+        initial={{ scale: 1.12, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 2.2, ease: [0.16, 1, 0.3, 1] }}
+        style={{ position: "absolute", inset: 0, zIndex: 0 }}
+      >
         <Image
           src="/campus-bg.jpg"
           alt="Apollo Convent Campus"
@@ -166,7 +171,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           position: "absolute", inset: 0,
           background: "linear-gradient(to right, rgba(255,255,255,0.05) 0%, transparent 50%, rgba(0,0,0,0.05) 100%)",
         }} />
-      </div>
+      </motion.div>
 
       {/* ══════════════════════════════════════════════════
           LAYER 2 — WHITE FOG on left (behind text)
@@ -286,6 +291,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.50, delay: 0.34, ease: [0.22, 1, 0.36, 1] }}
             style={{ display: "flex", gap: "14px", flexWrap: "wrap", marginBottom: "34px" }}
+            className="hero-buttons"
           >
             <button className="hbtn-primary" onClick={onAdmissionClick}>
               Discover Our Programs
@@ -313,6 +319,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
               display: "grid",
               gridTemplateColumns: "repeat(4, 1fr)",
               gap: "10px",
+              width: "100%",
               maxWidth: "450px",
             }}
             className="hero-cards"
@@ -324,7 +331,7 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
         </div>
 
         {/* ── RIGHT — Empty container (shows building directly from background image) ── */}
-        <div style={{ width: "100%", height: "100%" }} />
+        <div className="hero-right-spacer" style={{ width: "100%", height: "100%" }} />
       </div>
 
       {/* ══════════════════════════════════════════════════
@@ -469,6 +476,13 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
           flex-shrink: 0;
         }
 
+        .hero-text-container h1 {
+          justify-content: flex-start;
+        }
+        .hero-buttons {
+          justify-content: flex-start;
+        }
+
         /* Responsive */
         @media (max-width: 1024px) {
           #home {
@@ -484,12 +498,21 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
             text-align: center !important;
             align-items: center !important;
           }
+          .hero-text-container h1 {
+            justify-content: center !important;
+          }
+          .hero-buttons {
+            justify-content: center !important;
+          }
+          .hero-right-spacer {
+            display: none !important;
+          }
           .hero-bg-img {
-            object-position: 82% center !important; /* Positions building on right into center view on mobile */
+            object-position: 78% center !important; /* Positions building on right into center view on mobile */
           }
           .hero-fog-overlay {
             width: 100% !important;
-            background: radial-gradient(ellipse 90% 90% at 50% 50%, rgba(255,255,255,0.68) 0%, rgba(255,255,255,0.4) 60%, rgba(255,255,255,0.15) 100%) !important;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.55) 50%, rgba(255, 255, 255, 0.75) 100%) !important;
           }
         }
         @media (max-width: 768px) {
@@ -515,6 +538,10 @@ export default function HeroSection({ onAdmissionClick }: { onAdmissionClick?: (
         @media (max-width: 480px) {
           .hero-text-container {
             padding: 95px 16px 30px 16px !important;
+          }
+          .hero-cards {
+            grid-template-columns: 1fr !important;
+            gap: 10px !important;
           }
         }
       `}</style>

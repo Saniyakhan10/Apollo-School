@@ -34,24 +34,31 @@ export default function AboutHomeSection() {
         >
           {/* LEFT — Single clean image */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{ position: "relative" }}
           >
             <div className="about-image-container">
-              <Image
-                src="/about-our-school.jpg"
-                alt="Apollo Convent School Leadership"
-                fill
-                style={{ objectFit: "cover" }}
-                sizes="50vw"
-                priority
-                quality={95}
-              />
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                style={{ width: "100%", height: "100%", position: "relative" }}
+              >
+                <Image
+                  src="/about-our-school.jpg"
+                  alt="Apollo Convent School Leadership"
+                  fill
+                  style={{ objectFit: "cover" }}
+                  sizes="50vw"
+                  priority
+                  quality={95}
+                />
+              </motion.div>
               <div style={{
                 position: "absolute", inset: 0,
                 background: "linear-gradient(to top, rgba(67,69,158,0.3) 0%, transparent 50%)",
+                pointerEvents: "none"
               }} />
             </div>
 
@@ -94,6 +101,7 @@ export default function AboutHomeSection() {
                   initial={{ opacity: 0, x: 16 }}
                   animate={inView ? { opacity: 1, x: 0 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.07 }}
+                  whileHover={{ scale: 1.02, x: 8 }}
                   className="light-card"
                   style={{
                     display: "flex", alignItems: "center", gap: "10px",
@@ -111,9 +119,14 @@ export default function AboutHomeSection() {
             </div>
 
             <a href="/about" style={{ textDecoration: "none" }}>
-              <button className="btn-primary" style={{ color: "#ffffff", marginTop: "4px" }}>
+              <motion.button
+                whileHover={{ y: -3, scale: 1.02, boxShadow: "0 10px 20px rgba(67, 69, 158, 0.3)" }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary"
+                style={{ color: "#ffffff", marginTop: "4px" }}
+              >
                 Discover Our Story <ArrowRight size={17} />
-              </button>
+              </motion.button>
             </a>
           </motion.div>
         </div>

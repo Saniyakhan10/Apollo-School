@@ -391,7 +391,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             onClick={onClose}
-            style={{ position: "fixed", inset: 0, zIndex: 900, background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)" }}
+            style={{ position: "fixed", inset: 0, zIndex: 900, background: "rgba(0,0,0,0.55)" }}
           />
 
           {/* Modal */}
@@ -403,7 +403,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
             style={{ position: "fixed", inset: 0, zIndex: 901, display: "flex", alignItems: "center", justifyContent: "center", padding: "16px", pointerEvents: "none" }}
           >
             <div
-              className="registration-modal-content"
+              className="admission-form-modal"
               style={{
                 width: "100%", maxWidth: "680px", maxHeight: "92vh",
                 background: "#fff", borderRadius: "24px",
@@ -414,7 +414,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
               }}
             >
               {/* Header */}
-              <div style={{ padding: "24px 28px 20px", background: "linear-gradient(135deg, #43459E 0%, #62C5D2 100%)", position: "relative", flexShrink: 0 }}>
+              <div style={{ padding: "var(--modal-head-pad, 24px 28px 20px)", background: "linear-gradient(135deg, #43459E 0%, #62C5D2 100%)", position: "relative", flexShrink: 0 }}>
                 <button onClick={onClose} style={{ position: "absolute", top: 16, right: 16, background: "rgba(255,255,255,0.15)", border: "none", borderRadius: "10px", width: 34, height: 34, display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", color: "#fff" }}>
                   <X size={17} />
                 </button>
@@ -455,7 +455,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                     </motion.div>
                   </>
                 ) : (
-                  <form onSubmit={handleSubmit} noValidate style={{ padding: "24px 28px", display: "flex", flexDirection: "column", gap: "18px" }}>
+                  <form onSubmit={handleSubmit} noValidate style={{ padding: "var(--modal-pad, 24px 28px)", display: "flex", flexDirection: "column", gap: "18px" }}>
 
                     {/* Validation summary banner */}
                     <AnimatePresence>
@@ -524,7 +524,7 @@ export default function RegistrationForm({ isOpen, onClose }: Props) {
                         marginTop: "4px",
                       }}
                       onMouseEnter={e => {
-                        e.currentTarget.style.background = "#62C5D2";
+                        e.currentTarget.style.background = "#35378A";
                         e.currentTarget.style.transform = "translateY(-2px)";
                         e.currentTarget.style.boxShadow = "0 12px 28px rgba(67,69,158,0.4)";
                       }}

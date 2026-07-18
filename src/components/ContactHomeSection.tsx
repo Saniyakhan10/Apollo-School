@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { Send, Phone, Mail, MapPin, Clock, CheckCircle2 } from "lucide-react";
 
 export default function ContactHomeSection() {
@@ -143,24 +144,39 @@ export default function ContactHomeSection() {
           </div>
 
           {/* RIGHT — Form */}
-          <div className="registration-modal-content" style={{
+          <div className="admission-form-modal" style={{
+            borderRadius: "24px",
             overflow: "hidden",
           }}>
             {/* Form header strip */}
             <div style={{
-              background: "#43459E",
-              padding: "22px 32px",
+              background: "linear-gradient(135deg, #43459E 0%, #2A2C76 100%)",
+              padding: "24px 32px",
             }}>
-              <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, fontSize: "1.15rem", color: "#ffffff", margin: 0 }}>
+              <h3 style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 800,
+                fontSize: "1.25rem",
+                color: "#ffffff",
+                margin: 0,
+                letterSpacing: "-0.01em"
+              }}>
                 Send Us a Message
               </h3>
-              <p style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontSize: "0.82rem", color: "rgba(255,255,255,0.75)", margin: "4px 0 0" }}>
+              <p style={{
+                fontFamily: "'Plus Jakarta Sans', sans-serif",
+                fontWeight: 500,
+                fontSize: "0.85rem",
+                color: "#ffffff",
+                margin: "6px 0 0",
+                lineHeight: 1.5
+              }}>
                 We typically reply within 24 hours.
               </p>
             </div>
 
             {/* Form body */}
-            <div style={{ padding: "28px 32px" }}>
+            <div style={{ padding: "32px" }}>
               {sent ? (
                 <div style={{ textAlign: "center", padding: "40px 20px" }}>
                   <CheckCircle2 size={52} color="#10B981" style={{ margin: "0 auto 14px", display: "block" }} />
@@ -196,19 +212,24 @@ export default function ContactHomeSection() {
                     required
                     style={{ ...inputStyle, resize: "none" }}
                   />
-                  <button type="submit" style={{
-                    background: "#43459E",
-                    color: "#ffffff",
-                    width: "100%",
-                    padding: "13px 28px",
-                    borderRadius: "10px",
-                    display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
-                    fontWeight: 700, fontSize: "0.9rem",
-                    border: "none", cursor: "pointer",
-                    fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  }}>
-                    Send Message <Send size={15} />
-                  </button>
+                  <motion.button
+                    type="submit"
+                    whileHover={{ y: -2, background: "#35378A", boxShadow: "0 12px 30px rgba(67,69,158,0.3)" }}
+                    whileTap={{ scale: 0.98 }}
+                    style={{
+                      background: "#43459E",
+                      color: "#ffffff",
+                      width: "100%",
+                      padding: "14px 28px",
+                      borderRadius: "12px",
+                      display: "flex", alignItems: "center", justifyContent: "center", gap: "8px",
+                      fontWeight: 700, fontSize: "0.95rem",
+                      border: "none", cursor: "pointer",
+                      fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    }}
+                  >
+                    Send Message <Send size={16} />
+                  </motion.button>
                 </form>
               )}
             </div>

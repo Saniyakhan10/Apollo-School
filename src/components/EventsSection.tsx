@@ -209,7 +209,7 @@ export default function EventsSection() {
               >
                 {/* Image Container */}
                 <div style={{ position: "relative", height: "115px", width: "100%", overflow: "hidden" }}>
-                  <Image src={ev.image} alt={ev.title} fill style={{ objectFit: "cover" }} sizes="200px" quality={95} />
+                  <Image src={ev.image} alt={ev.title} fill style={{ objectFit: "cover", transition: "transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)" }} sizes="200px" quality={95} />
                   {/* Color Overlay */}
                   <div style={{
                     position: "absolute", inset: 0,
@@ -516,6 +516,9 @@ export default function EventsSection() {
         div[style*="scrollbarWidth: none"]::-webkit-scrollbar { display: none; }
         @media (max-width: 1024px) {
           .scroll-arrow-btn { display: none !important; }
+        }
+        .event-card:hover img {
+          transform: scale(1.08) !important;
         }
       `}</style>
     </section>

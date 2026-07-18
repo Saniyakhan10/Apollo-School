@@ -81,73 +81,81 @@ export default function StrengthsSection() {
                 key={i}
                 initial={{ opacity: 0, y: 32 }}
                 animate={inView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="strength-card"
-                style={{
-                  borderRadius: "20px",
-                  padding: "36px 28px",
-                  cursor: "default",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
+                transition={{ duration: 0.6, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                style={{ display: "flex", flexDirection: "column" }}
               >
-                {/* Thin colored left border accent — no gradient */}
                 <div
-                  className={`strength-accent-${i}`}
+                  className="strength-card"
                   style={{
-                    position: "absolute",
-                    top: 0, left: 0, bottom: 0,
-                    width: "3px",
-                    background: s.accent,
-                    borderRadius: "20px 0 0 20px",
-                    opacity: 0,
-                    transition: "opacity 0.35s ease",
-                  }}
-                />
-
-                {/* Plain icon box — no gradient */}
-                <div
-                  className={`strength-icon-box-${i}`}
-                  style={{
-                    width: 54,
-                    height: 54,
-                    borderRadius: "14px",
-                    background: `${s.accent}10`,
+                    borderRadius: "20px",
+                    padding: "36px 28px",
+                    cursor: "default",
+                    position: "relative",
+                    overflow: "hidden",
+                    height: "100%",
                     display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: "20px",
-                    transition: "background 0.35s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+                    flexDirection: "column",
                   }}
                 >
-                  <Icon
-                    size={24}
-                    color={s.accent}
-                    strokeWidth={2}
-                    className={`strength-icon-svg-${i}`}
-                    style={{ transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)" }}
+                  {/* Thin colored left border accent — no gradient */}
+                  <div
+                    className={`strength-accent-${i}`}
+                    style={{
+                      position: "absolute",
+                      top: 0, left: 0, bottom: 0,
+                      width: "3px",
+                      background: s.accent,
+                      borderRadius: "20px 0 0 20px",
+                      opacity: 0,
+                      transition: "opacity 0.35s ease",
+                    }}
                   />
+
+                  {/* Plain icon box — no gradient */}
+                  <div
+                    className={`strength-icon-box-${i}`}
+                    style={{
+                      width: 54,
+                      height: 54,
+                      borderRadius: "14px",
+                      background: `${s.accent}10`,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      marginBottom: "20px",
+                      transition: "background 0.35s ease, transform 0.4s cubic-bezier(0.22,1,0.36,1)",
+                    }}
+                  >
+                    <Icon
+                      size={24}
+                      color={s.accent}
+                      strokeWidth={2}
+                      className={`strength-icon-svg-${i}`}
+                      style={{ transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)" }}
+                    />
+                  </div>
+
+                  <h3 style={{
+                    fontFamily: "'Merriweather', Georgia, serif",
+                    fontSize: "1.02rem",
+                    fontWeight: 900,
+                    color: "#1F2937",
+                    marginBottom: "10px",
+                    transition: "color 0.3s ease",
+                  }} className={`strength-title-${i}`}>
+                    {s.title}
+                  </h3>
+
+                  <p style={{
+                    fontFamily: "'Plus Jakarta Sans', sans-serif",
+                    fontSize: "0.86rem",
+                    color: "#6B7280",
+                    lineHeight: 1.75,
+                  }}>
+                    {s.desc}
+                  </p>
                 </div>
-
-                <h3 style={{
-                  fontFamily: "'Merriweather', Georgia, serif",
-                  fontSize: "1.02rem",
-                  fontWeight: 900,
-                  color: "#1F2937",
-                  marginBottom: "10px",
-                  transition: "color 0.3s ease",
-                }} className={`strength-title-${i}`}>
-                  {s.title}
-                </h3>
-
-                <p style={{
-                  fontFamily: "'Plus Jakarta Sans', sans-serif",
-                  fontSize: "0.86rem",
-                  color: "#6B7280",
-                  lineHeight: 1.75,
-                }}>
-                  {s.desc}
-                </p>
               </motion.div>
             );
           })}
@@ -159,7 +167,6 @@ export default function StrengthsSection() {
         @media (max-width: 640px)  { .strengths-grid { grid-template-columns: 1fr !important; } }
 
         .strength-card:hover {
-          transform: translateY(-10px) !important;
           box-shadow: 0 24px 48px rgba(0,0,0,0.09) !important;
           border-color: #43459E !important;
         }
